@@ -36,7 +36,22 @@ def spotipy_track(id):
 
 @app.route("/spotipy/album/<string:id>")
 def spotipy_album(id):
-      pass
+    album = spotify.album(id)
+    album_name = album["name"]
+    album_by = ""           
+    for artist in album["artists"]:
+            fetched = f' {artist["name"]}'
+            if "Various Artists" not in fetched:
+                album_by += fetched
+    images = album["images"]
+    label = album["label"]
+    release_date = album["release_date"]
+    total_tracks = album["total_tracks"]
+    tracks = []
+    for track in album["tracks"]["items"]:
+        pass
+    data = {"mode":"under test!!"}
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

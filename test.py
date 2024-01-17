@@ -11,4 +11,7 @@ import config
 client_credentials_manager = (SpotifyClientCredentials(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET))
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-album = spotify.album()
+url = "https://open.spotify.com/album/2r3tG1S4XlpHM3z7xUp2lD?si=J36waD2cRKeIQezZSNYJXw"
+
+album = spotify.album(url)
+print(album)

@@ -82,7 +82,7 @@
   ],
   "disc_number": 1,
   "duration_ms": 133305,
-  "explicit": false,
+  "explicit": False,
   "external_ids": {
     "isrc": "QZES62251642"
   },
@@ -91,7 +91,7 @@
   },
   "href": "https://api.spotify.com/v1/tracks/6qrifdo7QINdPQr80IelGi",
   "id": "6qrifdo7QINdPQr80IelGi",
-  "is_local": false,
+  "is_local": False,
   "name": "Iraaday",
   "popularity": 73,
   "preview_url": "https://p.scdn.co/mp3-preview/6692bc18252380cf993f2169390bac538dc85902?cid=580792a76dd44ddfbb8b6f0dfee6da42",
