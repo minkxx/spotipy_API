@@ -91,7 +91,8 @@ def spotipy_playlist(id):
                         artists += fetched
         song_dict = {"track_name":track_name,
                     "artists":artists,
-                    "duration_ms":duration}
+                    "duration_ms":duration,
+                    "images":images}
         tracks.append(song_dict) 
     data = {
          "playlist_name":playlist_name,
@@ -101,7 +102,6 @@ def spotipy_playlist(id):
           "owner":owner,
           "owner_profile_url":owner_profile_url,
           "owner_type":owner_type,
-          "images":images,
           "tracks":tracks
     }
     return jsonify(data)
