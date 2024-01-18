@@ -80,8 +80,7 @@ def spotipy_playlist(id):
     owner_type = playlist["owner"]["type"]
     tracks = []
     for m_track in playlist["tracks"]["items"]:
-        track = m_track["track"]["album"]
-        
+        track = m_track["track"]
         track_name = track["name"]
         artists = ""
         duration = track["duration_ms"]
@@ -89,15 +88,21 @@ def spotipy_playlist(id):
                     fetched = f' {artist["name"]}'
                     if "Various Artists" not in fetched:
                         artists += fetched
-
         song_dict = {"track_name":track_name,
                     "artists":artists,
                     "duration_ms":duration}
         tracks.append(song_dict) 
-
-
-
-    return jsonify(playlist)
+    data = {
+         "playlist_name":playlist_name,
+          "description":description,
+          "followers":followers,
+          "playlist_thumbnail":playlist_thumbnail,
+          "owner":owner,
+          "owner_profile_url":owner_profile_url,
+          "owner_type":owner_type,
+          "tracks":tracks
+    }
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)
