@@ -81,6 +81,7 @@ def spotipy_playlist(id):
     tracks = []
     for m_track in playlist["tracks"]["items"]:
         track = m_track["track"]["album"]
+        
         track_name = track["name"]
         artists = ""
         duration = track["duration_ms"]
@@ -88,6 +89,7 @@ def spotipy_playlist(id):
                     fetched = f' {artist["name"]}'
                     if "Various Artists" not in fetched:
                         artists += fetched
+
         song_dict = {"track_name":track_name,
                     "artists":artists,
                     "duration_ms":duration}
