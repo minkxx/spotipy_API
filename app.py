@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import config
@@ -10,7 +10,11 @@ spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route("/")
 def home():
-    return "Home!!"
+    return render_template("index.html")
+
+@app.route("/spotipy")
+def spotipy():
+    return render_template("index.html")
 
 @app.route("/spotipy/track/<string:id>")
 def spotipy_track(id):
