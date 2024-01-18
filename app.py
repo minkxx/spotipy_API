@@ -84,6 +84,7 @@ def spotipy_playlist(id):
         track_name = track["name"]
         artists = ""
         duration = track["duration_ms"]
+        images = track["album"]["images"]
         for artist in track["artists"]:
                     fetched = f' {artist["name"]}'
                     if "Various Artists" not in fetched:
@@ -100,6 +101,7 @@ def spotipy_playlist(id):
           "owner":owner,
           "owner_profile_url":owner_profile_url,
           "owner_type":owner_type,
+          "images":images,
           "tracks":tracks
     }
     return jsonify(data)
