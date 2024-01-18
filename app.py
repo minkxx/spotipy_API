@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-import re
 import config
 
 app = Flask(__name__)
@@ -30,7 +29,7 @@ def spotipy_track(id):
           "artists":artists,
           "images":images,
           "release_date":release_date,
-          "duration":duration
+          "duration_ms":duration
     }
     return jsonify(data)
 
@@ -49,9 +48,29 @@ def spotipy_album(id):
     total_tracks = album["total_tracks"]
     tracks = []
     for track in album["tracks"]["items"]:
-        pass
-    data = {"mode":"under test!!"}
+        track_name = track["name"]
+        artists = ""
+        duration = track["duration_ms"]
+        for artist in track["artists"]:
+                    fetched = f' {artist["name"]}'
+                    if "Various Artists" not in fetched:
+                        artists += fetched
+        song_dict = {"track_name":track_name,
+                     "artists":artists,
+                     "duration_ms":duration}
+        tracks.append(song_dict)   
+    data = {"album_name":album_name,
+            "album_by":album_by,
+            "images":images,
+            "label":label,
+            "release_date":release_date,
+            "total_tracks":total_tracks,
+            "tracks":tracks}
     return jsonify(data)
+
+@app.route("/spotipy/playlist/<string:id>")
+def spotipy_playlist(id):
+    pass
 
 if __name__ == "__main__":
     app.run(debug=True)
