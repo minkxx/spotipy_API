@@ -70,7 +70,32 @@ def spotipy_album(id):
 
 @app.route("/spotipy/playlist/<string:id>")
 def spotipy_playlist(id):
-    pass
+    playlist = spotify.playlist(id)
+    playlist_name = playlist["name"]
+    description = playlist["description"]
+    followers = playlist["followers"]["total"]
+    playlist_thumbnail = playlist["images"]
+    owner = playlist["owner"]["display_name"]
+    owner_profile_url = playlist["owner"]["external_urls"]["spotify"]
+    owner_type = playlist["owner"]["type"]
+    tracks = []
+    for m_track in playlist["tracks"]["items"]:
+        track = m_track["track"]["album"]
+        track_name = track["name"]
+        artists = ""
+        duration = track["duration_ms"]
+        for artist in track["artists"]:
+                    fetched = f' {artist["name"]}'
+                    if "Various Artists" not in fetched:
+                        artists += fetched
+        song_dict = {"track_name":track_name,
+                    "artists":artists,
+                    "duration_ms":duration}
+        tracks.append(song_dict) 
+
+
+
+    return jsonify(playlist)
 
 if __name__ == "__main__":
     app.run(debug=True)
