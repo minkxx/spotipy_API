@@ -1,3 +1,5 @@
+# version : 0.0.2
+
 from flask import Flask, jsonify, render_template, request
 import spotipy
 from spotipy.exceptions import SpotifyException
