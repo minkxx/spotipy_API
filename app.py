@@ -8,7 +8,7 @@ import config
 
 app = Flask(__name__)
 
-client_credentials_manager = (SpotifyClientCredentials("580792a76dd44ddfbb8b6f0dfee6da42", "b9fc77e878914e559d6b33c22d3bcae9"))
+client_credentials_manager = (SpotifyClientCredentials(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET))
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route("/")
