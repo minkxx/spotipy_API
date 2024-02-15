@@ -8,12 +8,16 @@ import config
 
 app = Flask(__name__)
 
-client_credentials_manager = (SpotifyClientCredentials(config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET))
+client_credentials_manager = SpotifyClientCredentials(
+    config.SPOTIFY_CLIENT_ID, config.SPOTIFY_CLIENT_SECRET
+)
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/spotipy")
 def spotipy():
@@ -30,22 +34,22 @@ def spotipy():
                 release_date = track["album"]["release_date"]
                 duration = track["duration_ms"]
                 for artist in track["artists"]:
-                            fetched = f' {artist["name"]}'
-                            if "Various Artists" not in fetched:
-                                artists += fetched
+                    fetched = f' {artist["name"]}'
+                    if "Various Artists" not in fetched:
+                        artists += fetched
                 data = {
-                    "track_name":track_name,
-                    "artists":artists,
-                    "images":images,
-                    "release_date":release_date,
-                    "duration_ms":duration
+                    "track_name": track_name,
+                    "artists": artists,
+                    "images": images,
+                    "release_date": release_date,
+                    "duration_ms": duration,
                 }
                 return jsonify(data)
             except SpotifyException as se:
-                data = {"S002":{"error":str(se)}}
+                data = {"S002": {"error": str(se)}}
                 return jsonify(data)
         else:
-            data = {"S001":{"error":"No id is provided!"}}
+            data = {"S001": {"error": "No id is provided!"}}
             return jsonify(data)
     elif arg_type == "album":
         if arg_id:
@@ -53,11 +57,11 @@ def spotipy():
                 url = f"https://open.spotify.com/album/{arg_id}"
                 album = spotify.album(url)
                 album_name = album["name"]
-                album_by = ""           
+                album_by = ""
                 for artist in album["artists"]:
-                        fetched = f' {artist["name"]}'
-                        if "Various Artists" not in fetched:
-                            album_by += fetched
+                    fetched = f' {artist["name"]}'
+                    if "Various Artists" not in fetched:
+                        album_by += fetched
                 images = album["images"]
                 label = album["label"]
                 release_date = album["release_date"]
@@ -68,26 +72,30 @@ def spotipy():
                     artists = ""
                     duration = track["duration_ms"]
                     for artist in track["artists"]:
-                                fetched = f' {artist["name"]}'
-                                if "Various Artists" not in fetched:
-                                    artists += fetched
-                    song_dict = {"track_name":track_name,
-                                "artists":artists,
-                                "duration_ms":duration}
-                    tracks.append(song_dict)   
-                data = {"album_name":album_name,
-                        "album_by":album_by,
-                        "images":images,
-                        "label":label,
-                        "release_date":release_date,
-                        "total_tracks":total_tracks,
-                        "tracks":tracks}
+                        fetched = f' {artist["name"]}'
+                        if "Various Artists" not in fetched:
+                            artists += fetched
+                    song_dict = {
+                        "track_name": track_name,
+                        "artists": artists,
+                        "duration_ms": duration,
+                    }
+                    tracks.append(song_dict)
+                data = {
+                    "album_name": album_name,
+                    "album_by": album_by,
+                    "images": images,
+                    "label": label,
+                    "release_date": release_date,
+                    "total_tracks": total_tracks,
+                    "tracks": tracks,
+                }
                 return jsonify(data)
             except SpotifyException as se:
-                data = {"S002":{"error":str(se)}}
+                data = {"S002": {"error": str(se)}}
                 return jsonify(data)
         else:
-            data = {"S001":{"error":"No id is provided!"}}
+            data = {"S001": {"error": "No id is provided!"}}
             return jsonify(data)
     elif arg_type == "playlist":
         if arg_id:
@@ -109,34 +117,37 @@ def spotipy():
                     duration = track["duration_ms"]
                     images = track["album"]["images"]
                     for artist in track["artists"]:
-                                fetched = f' {artist["name"]}'
-                                if "Various Artists" not in fetched:
-                                    artists += fetched
-                    song_dict = {"track_name":track_name,
-                                "artists":artists,
-                                "duration_ms":duration,
-                                "images":images}
-                    tracks.append(song_dict) 
+                        fetched = f' {artist["name"]}'
+                        if "Various Artists" not in fetched:
+                            artists += fetched
+                    song_dict = {
+                        "track_name": track_name,
+                        "artists": artists,
+                        "duration_ms": duration,
+                        "images": images,
+                    }
+                    tracks.append(song_dict)
                 data = {
-                    "playlist_name":playlist_name,
-                    "description":description,
-                    "followers":followers,
-                    "playlist_thumbnail":playlist_thumbnail,
-                    "owner":owner,
-                    "owner_profile_url":owner_profile_url,
-                    "owner_type":owner_type,
-                    "tracks":tracks
+                    "playlist_name": playlist_name,
+                    "description": description,
+                    "followers": followers,
+                    "playlist_thumbnail": playlist_thumbnail,
+                    "owner": owner,
+                    "owner_profile_url": owner_profile_url,
+                    "owner_type": owner_type,
+                    "tracks": tracks,
                 }
                 return jsonify(data)
             except SpotifyException as se:
-                data = {"S002":{"error":str(se)}}
+                data = {"S002": {"error": str(se)}}
                 return jsonify(data)
         else:
-            data = {"S001":{"error":"No id is provided!"}}
+            data = {"S001": {"error": "No id is provided!"}}
             return jsonify(data)
     else:
-        data = {"S000":{"error":"invalid type!"}}
+        data = {"S000": {"error": "invalid type!"}}
         return jsonify(data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
