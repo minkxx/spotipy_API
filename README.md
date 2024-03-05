@@ -1,11 +1,11 @@
 # SpotiPy API
  Spotipy-API - Documentation
 
-**Version:** 0.0.3
+**Version:** 0.0.4
 
 **Last Updated:** 5th Mar, 2024
 
-**Updates:** Migrated server from render to vercel.
+**Updates:** URL updated to `https://spotipy-api.vercel.app`
 
 Get started
 ===========
@@ -18,7 +18,7 @@ get data
 --------
 
 To get data you need to make a POST call to the following url :  
-`https://spotipy-api.onrender.com/spotipy?type=your_id_type&id=your_id`
+`https://spotipy-api.vercel.app/spotipy?type=your_id_type&id=your_id`
 
 # More detailed documentation
-`https://spotipy-api.onrender.com`
+`https://spotipy-api.vercel.app
