@@ -21,4 +21,4 @@ To get data you need to make a POST call to the following url :
 `https://spotipy-api.vercel.app/spotipy?type=your_id_type&id=your_id`
 
 # More detailed documentation
-`https://spotipy-api.vercel.app
+`https://spotipy-api.vercel.app`
