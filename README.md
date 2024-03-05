@@ -1,9 +1,11 @@
 # SpotiPy API
  Spotipy-API - Documentation
 
-**Version:** 0.0.2
+**Version:** 0.0.3
 
-**Last Updated:** 25th Jan, 2024
+**Last Updated:** 5th Mar, 2024
+
+**Updates:** Migrated server from render to vercel.
 
 Get started
 ===========
